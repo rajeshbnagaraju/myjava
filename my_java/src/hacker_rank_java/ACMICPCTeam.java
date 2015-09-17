@@ -17,21 +17,19 @@ public class ACMICPCTeam {
 		for(int iFixed = 0;iFixed<nPeopleSize;iFixed++) {
 			for(int iVar=iFixed+1;iVar<nPeopleSize;iVar++){
 				BigInteger orValue = pplRep[iFixed].or(pplRep[iVar]);
-				System.out.println("$$$$"+orValue);
-				if (orValue.compareTo(bigMaxTopics)==0) {
+				//System.out.println(orValue);
+				if(orValue.bitCount()==bigMaxTopics.bitCount()) {
 					iMaxCount++;
-					System.out.println("***incrementing max--->");
 				}
-				if(orValue.compareTo(bigMaxTopics)==1) {
+				if(orValue.bitCount()>bigMaxTopics.bitCount()) {
 					iMaxCount = 1;
-					System.out.println("***re-setting max orValue:"+orValue+"::bigMaxTopics:"+
-							bigMaxTopics);
 					bigMaxTopics = orValue;
-				}  
+				}
 			}
 		}
 		int iBitCount = 0;
 		BigInteger shiftedNumber = bigMaxTopics;
+		//System.out.println("%%%%%bigMaxTopics:"+bigMaxTopics);
 		while(!shiftedNumber.equals(BigInteger.ZERO)) {
 			if(shiftedNumber.and(BigInteger.ONE).
 					compareTo(BigInteger.ONE)==0) {				
